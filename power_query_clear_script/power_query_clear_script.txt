@@ -1,0 +1,20 @@
+let
+    Source = Csv.Document(File.Contents("C:\Users\Kacper\Desktop\Programowanie\SQL\projekt udemy courses web dev\raw_csv\WebDevelopment.csv"),[Delimiter=",", Columns=16, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"id", Int64.Type}, {"title", type text}, {"url", type text}, {"isPaid", type logical}, {"price", type text}, {"numSubscribers", Int64.Type}, {"numReviews", Int64.Type}, {"numPublishedLectures", Int64.Type}, {"instructionalLevel", type text}, {"contentInfo", type text}, {"publishedTime", type datetime}, {"", type text}, {"_1", type text}, {"Is Paid", type text}, {"Total", Int64.Type}, {"Percent", Percentage.Type}}),
+    #"Split Column by Delimiter" = Table.SplitColumn(#"Changed Type", "contentInfo", Splitter.SplitTextByDelimiter(" ", QuoteStyle.None), {"contentInfo.1", "contentInfo.2"}),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"contentInfo.1", type text}, {"contentInfo.2", type text}}),
+    #"Removed Columns" = Table.RemoveColumns(#"Changed Type1",{"contentInfo.2"}),
+    #"Replaced Value" = Table.ReplaceValue(#"Removed Columns",".",",",Replacer.ReplaceText,{"contentInfo.1"}),
+    #"Changed Type2" = Table.TransformColumnTypes(#"Replaced Value",{{"contentInfo.1", type number}}),
+    #"Renamed Columns" = Table.RenameColumns(#"Changed Type2",{{"contentInfo.1", "contentLenght"}}),
+    #"Split Column by Delimiter1" = Table.SplitColumn(Table.TransformColumnTypes(#"Renamed Columns", {{"publishedTime", type text}}, "pl-PL"), "publishedTime", Splitter.SplitTextByDelimiter(" ", QuoteStyle.None), {"publishedTime.1", "publishedTime.2"}),
+    #"Changed Type3" = Table.TransformColumnTypes(#"Split Column by Delimiter1",{{"publishedTime.1", type date}, {"publishedTime.2", type time}}),
+    #"Renamed Columns1" = Table.RenameColumns(#"Changed Type3",{{"publishedTime.1", "publishedDate"}, {"publishedTime.2", "publishedTime"}}),
+    #"Removed Columns1" = Table.RemoveColumns(#"Renamed Columns1",{"", "_1", "Is Paid", "Total", "Percent"}),
+    #"Replaced Value1" = Table.ReplaceValue(#"Removed Columns1","Free","0",Replacer.ReplaceText,{"price"}),
+    #"Added Conditional Column" = Table.AddColumn(#"Replaced Value1", "is_paid", each if [isPaid] = true then 1 else 0),
+    #"Reordered Columns" = Table.ReorderColumns(#"Added Conditional Column",{"id", "title", "url", "isPaid", "is_paid", "price", "numSubscribers", "numReviews", "numPublishedLectures", "instructionalLevel", "contentLenght", "publishedDate", "publishedTime"}),
+    #"Removed Columns2" = Table.RemoveColumns(#"Reordered Columns",{"isPaid"})
+in
+    #"Removed Columns2"
