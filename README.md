@@ -28,10 +28,6 @@ Analyzed the number of courses published in each quarter to identify growth peri
 
 Explored the relationship between the number of subscribers and the number of course lectures.
 
-#### Months with the Highest Number of Published Courses:
-
-Identified months with increased course publication activity.
-
 ### 3. Teaching Levels:
 
 #### Popularity of Courses by Instructional Level:
@@ -54,27 +50,14 @@ Identified and listed the most popular courses labeled as "Beginner Level."
 
 Listed the most frequently reviewed courses in the "Beginner Level" category.
 
-### 4. Temporal Trends:
-
-#### Seasonality in Published Courses:
-
-Investigated whether there is seasonality in the number of published courses.
-
-#### Course Popularity by Day and Hour:
-
-Explored the popularity of courses based on the day of the week and hour of publication.
 
 ### Additional Observations:
 
 - No clear correlation between course prices and the number of subscribers or reviews.
 - Courses priced at 185 tend to have the highest average number of subscribers and reviews.
 - Free courses attract, on average, three times more subscribers than paid courses.
-- No significant correlation between the number of published courses and quarters.
 - No evident correlation between the number of published lectures and the number of subscribers.
 - Courses categorized as "All Levels" and "Beginner Levels" enjoy the highest popularity.
-- Uniform distribution in the number of courses published each month.
-- Thursday and Friday are the best days for course publication.
-- Optimal publication hours: 8, 12, 13, 14, with Friday at 8 being the most effective.
 
 ## Technologies Used:
 
