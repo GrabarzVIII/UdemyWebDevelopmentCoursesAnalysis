@@ -76,7 +76,7 @@ Listed the most frequently reviewed courses in the "Beginner Level" category.
 
 Feel free to explore the comprehensive analyses and leverage the findings for further insights into the world of web development courses!
 
-Visualization of this [data]()  coming soon
+Visualization of this [data](https://www.novypro.com/project/udemywebdevcoursesdata)
 
 For any inquiries, contact me via LinkedIn [Kacper](https://www.linkedin.com/in/kacper-grabarczyk-627b1519a/).
 
